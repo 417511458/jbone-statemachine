@@ -1,7 +1,7 @@
 package cn.jbone.statemachine.core.result;
 
 /**
- * 返回结果码
+ * 结果码
  */
 public enum StateMachineResultCode {
     SUCCESS(0,"成功"),

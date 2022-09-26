@@ -1,7 +1,7 @@
 package cn.jbone.statemachine.core.result;
 
 /**
- * 状态机结果返回值
+ * 状态机统一返回结果
  */
 public class StateMachineResult {
     /**
@@ -65,7 +65,7 @@ public class StateMachineResult {
 
     /**
      * 判断结果是否成功
-     * @return
+     * @return 如果执行成功，返回true，如果执行失败，返回false
      */
     public boolean isSuccess(){
         return this.code == StateMachineResultCode.SUCCESS.getCode();

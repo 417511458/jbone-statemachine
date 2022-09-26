@@ -99,6 +99,11 @@ public class StateMachineEngine<S,E> {
         return stateMachineResult;
     }
 
+    /**
+     * 重置状态机状态
+     * @param stateMachine 状态机
+     * @param currentState 要重置的目标状态
+     */
     private void resetState(StateMachine<S,E> stateMachine,S currentState){
         if(currentState == null){
             return;
