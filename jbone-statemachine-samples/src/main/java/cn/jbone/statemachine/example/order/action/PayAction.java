@@ -1,6 +1,5 @@
 package cn.jbone.statemachine.example.order.action;
 
-import cn.jbone.statemachine.core.action.StateMachineAction;
 import cn.jbone.statemachine.core.action.StateMachineActionAdapter;
 import cn.jbone.statemachine.example.order.OrderEvents;
 import cn.jbone.statemachine.example.order.OrderStates;

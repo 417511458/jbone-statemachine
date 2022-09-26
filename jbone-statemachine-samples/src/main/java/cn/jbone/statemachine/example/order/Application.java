@@ -84,10 +84,9 @@ public class Application implements CommandLineRunner {
     /**
      * 统一的发送事件驱动状态机的方法
      * 1.加载订单
-     * 2.创建状态机实例
-     * 3.重置状态机状态
-     * 4.发送事件驱动
-     * 5.订阅结果
+     * 2.传递参数
+     * 3.发送事件驱动
+     * 4.获取结果
      */
     public StateMachineResult sendEvent(OrderEvents event, String orderId) throws Exception {
         System.out.println("【SendEvent】" + orderId + event + " start ----------");

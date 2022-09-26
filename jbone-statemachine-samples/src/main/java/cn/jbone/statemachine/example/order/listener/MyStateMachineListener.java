@@ -16,7 +16,9 @@ public class MyStateMachineListener extends StateMachineListener<OrderStates, Or
     OrderService orderService;
     @Override
     public void stateChanged(StateContext<OrderStates, OrderEvents> stateContext, State<OrderStates, OrderEvents> from, State<OrderStates, OrderEvents> to) {
+        //获取订单
         Order order = (Order) stateContext.getMessageHeader("order");
+        //更新订单状态为目标状态
         order.setState(stateContext.getTarget().getId());
         orderService.updateOrder(order);
     }

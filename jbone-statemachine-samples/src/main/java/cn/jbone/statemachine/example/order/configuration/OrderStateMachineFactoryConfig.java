@@ -45,12 +45,6 @@ public class OrderStateMachineFactoryConfig extends EnumStateMachineConfigurerAd
         states.withStates().state(OrderStates.WAIT_RECEIVE,entryAction,exitAction);
         states.withStates().state(OrderStates.WAIT_EVALUATE,entryAction,exitAction);
         states.withStates().state(OrderStates.SUCCESS,entryAction,exitAction);
-        //当这两组同时配置时，只有stateAction生效
-        // 在STATE_ENTRY（进入State）时调用StateAction
-//        states.withStates().state(OrderStates.WAIT_SHIP,stateAction);
-//        states.withStates().state(OrderStates.WAIT_RECEIVE,stateAction);
-//        states.withStates().state(OrderStates.WAIT_EVALUATE,stateAction);
-//        states.withStates().state(OrderStates.SUCCESS,stateAction);
     }
 
     @Override
@@ -58,19 +52,19 @@ public class OrderStateMachineFactoryConfig extends EnumStateMachineConfigurerAd
             throws Exception {
         //配置流转
         transitions
-                //当发生OrderEvents.PAY时，执行myGuard，并从OrderStates.WAIT_PAY流转至OrderStates.WAIT_DELIVER，在流转过程中执行payAction，发生异常时执行exceptionAction
+                //当发生OrderEvents.PAY时，从OrderStates.WAIT_PAY流转至OrderStates.WAIT_DELIVER，在流转过程中执行payAction
                 .withExternal()
                 .source(OrderStates.WAIT_PAY).target(OrderStates.WAIT_DELIVER).event(OrderEvents.PAY).action(payAction)
                 .and()
-                //当发生OrderEvents.DELIVER时，从OrderStates.WAIT_DELIVER流转至OrderStates.WAIT_RECEIVE，在流转过程中执行deliverAction，发生异常时执行exceptionAction
+                //当发生OrderEvents.DELIVER时，从OrderStates.WAIT_DELIVER流转至OrderStates.WAIT_RECEIVE，在流转过程中执行deliverAction
                 .withExternal()
                 .source(OrderStates.WAIT_DELIVER).target(OrderStates.WAIT_RECEIVE).event(OrderEvents.DELIVER).action(deliverAction)
                 .and()
-                //当发生OrderEvents.RECEIVE时，从OrderStates.WAIT_RECEIVE流转至OrderStates.WAIT_EVALUATE，在流转过程中执行receiveAction，发生异常时执行exceptionAction
+                //当发生OrderEvents.RECEIVE时，从OrderStates.WAIT_RECEIVE流转至OrderStates.WAIT_EVALUATE，在流转过程中执行receiveAction
                 .withExternal()
                 .source(OrderStates.WAIT_RECEIVE).target(OrderStates.WAIT_EVALUATE).event(OrderEvents.RECEIVE).action(receiveAction)
                 .and()
-                //当发生OrderEvents.EVALUATE时，从OrderStates.WAIT_EVALUATE流转至OrderStates.SUCCESS，在流转过程中执行evalAction，发生异常时执行exceptionAction
+                //当发生OrderEvents.EVALUATE时，从OrderStates.WAIT_EVALUATE流转至OrderStates.SUCCESS，在流转过程中执行evalAction
                 .withExternal()
                 .source(OrderStates.WAIT_EVALUATE).target(OrderStates.SUCCESS).event(OrderEvents.EVALUATE).action(evalAction)
         ;
